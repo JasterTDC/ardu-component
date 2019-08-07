@@ -7,8 +7,8 @@ services :
     environment :
       MYSQL_ROOT_PASSWORD : root
     volumes :
-      - ./databaseConfig:/docker-entrypoint-initdb.d
-      - ./databaseData:/var/lib/mysql/
+      - ./database_init:/docker-entrypoint-initdb.d
+      - ./.mysql_data:/var/lib/mysql/
   nginx :
     image : ardu_component:latest
     ports :

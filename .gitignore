@@ -1,4 +1,4 @@
 .idea/
 logs/
-databaseData/
+.mysql_data/
 code/vendor/
