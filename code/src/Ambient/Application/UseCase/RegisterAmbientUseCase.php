@@ -65,7 +65,7 @@ final class RegisterAmbientUseCase
         } catch (\Exception $e) {
             return new RegisterAmbientUseCaseResponse(
                 false,
-                null,
+                $e->getMessage(),
                 null
             );
         }

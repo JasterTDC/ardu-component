@@ -10,7 +10,7 @@ $application = AppFactory::create();
 $container = $application->getContainer();
 
 return [
-    RegisterAmbientController::class => function(ContainerInterface $container) {
+    RegisterAmbientController::class => function (ContainerInterface $container) {
         return new RegisterAmbientController(
             $container->get(RegisterAmbientUseCase::class)
         );

@@ -47,16 +47,14 @@ class RegisterAmbientController
             'success'   => false
         ];
 
-        $parameters = (array) $request->getParsedBody();
-
-        var_dump($request->getParsedBody());die();
+        $parameters = json_decode($request->getBody(), true);
 
         if (empty($parameters['temperature'])) {
             $ret['message'] = 'Temperature is missing';
 
             $response = $response->withHeader('Content-type', 'application/json');
 
-            $response->getBody()->write(json_encode($ret));
+            $response->getBody()->write((string) json_encode($ret));
 
             return $response->withStatus(400);
         }
@@ -66,7 +64,7 @@ class RegisterAmbientController
 
             $response = $response->withHeader('Content-type', 'application/json');
 
-            $response->getBody()->write(json_encode($ret));
+            $response->getBody()->write((string) json_encode($ret));
 
             return $response->withStatus(400);
         }
@@ -88,7 +86,7 @@ class RegisterAmbientController
 
         $response = $response->withHeader('Content-type', 'application/json');
 
-        $response->getBody()->write(json_encode($useCaseResponseArr));
+        $response->getBody()->write((string) json_encode($useCaseResponseArr));
 
         if ($useCaseResponse->success()) {
             return $response->withStatus(200);

@@ -45,9 +45,6 @@ class ComponentWriterPDO implements ComponentWriterInterface
         string $dateFormat
     ) {
         $this->pdo = $pdo;
-        $this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
         $this->ambientFactory = $ambientFactory;
         $this->dateFormat = $dateFormat;
     }
@@ -77,11 +74,20 @@ class ComponentWriterPDO implements ComponentWriterInterface
     protected function insertAmbient(
         Ambient $ambient
     ) : Ambient {
-        $sql = <<<SQL
-            INSERT INTO `components`.`ambient`(`temperature`, `humidity`, `createdAt`)
-            VALUES
-            (':temperature', ':humidity', ':created')
-        SQL;
+        $sql = 'INSERT INTO `components`.`ambient` (
+            `temperature`,
+            `humidity`,
+            `createdAt`
+            ) VALUES (
+              :temperature,
+              :humidity,
+              :created
+            ) 
+        ';
+
+        if (empty($ambient->createdAt())) {
+            throw new AmbientPersistenceException();
+        }
 
         $parameters = [
             'temperature'   => $ambient->temperature(),
@@ -93,9 +99,13 @@ class ComponentWriterPDO implements ComponentWriterInterface
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($parameters);
 
-            $ambient->setId((int) $ambient->id());
-        } catch(\PDOException $e) {
-            throw new AmbientPersistenceException();
+            $ambient->setId((int) $this->pdo->lastInsertId());
+
+            return $ambient;
+        } catch (\PDOException $e) {
+            throw new AmbientPersistenceException(
+                $e->getMessage()
+            );
         }
     }
 }

@@ -32,11 +32,16 @@ return [
             "port={$databaseConfig['port']};".
             "dbname={$databaseConfig['database']}";
 
-        return new PDO(
+        $pdo = new PDO(
             $dsn,
             $databaseConfig['username'],
             $databaseConfig['password']
         );
+
+        $pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        return $pdo;
     },
     ComponentWriterPDO::class => function (ContainerInterface $container) {
         $dateFormat = $container->get('config')['dateFormat'];

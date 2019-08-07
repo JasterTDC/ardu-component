@@ -4,6 +4,7 @@
 namespace ComAI\ArduComponents\Ambient\Infrastructure\Factory;
 
 use ComAI\ArduComponents\Ambient\Domain\Entity\Ambient;
+use ComAI\ArduComponents\Ambient\Domain\Exception\AmbientCreationDateException;
 use ComAI\ArduComponents\Ambient\Domain\Factory\AmbientFactoryInterface;
 
 /**
@@ -53,6 +54,10 @@ class AmbientFactory implements AmbientFactoryInterface
                 $this->dateFormat,
                 $createdAt
             );
+        }
+
+        if (empty($created)) {
+            throw new AmbientCreationDateException();
         }
 
         return new Ambient(
