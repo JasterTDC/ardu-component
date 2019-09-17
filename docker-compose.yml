@@ -10,7 +10,8 @@ services :
       - ./database_init:/docker-entrypoint-initdb.d
       - ./.mysql_data:/var/lib/mysql/
   nginx :
-    image : ardu_component:latest
+    build :
+      context : "./docker-base"
     ports :
       - "80:80"
     depends_on :
