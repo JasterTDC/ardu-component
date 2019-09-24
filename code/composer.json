@@ -6,7 +6,10 @@
     "slim/psr7" : "^0.4",
     "php-di/php-di" : "^6",
     "ext-json" : "*",
-    "ext-pdo" : "*"
+    "ext-pdo" : "*",
+    "ext-dom" : "*",
+    "ext-simplexml" : "*",
+    "ext-mbstring" : "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^8",
