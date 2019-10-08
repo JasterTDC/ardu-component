@@ -2,6 +2,7 @@
 
 use ComAI\ArduComponents\Ambient\Infrastructure\Factory\AmbientFactory;
 use ComAI\ArduComponents\Ambient\Infrastructure\Repository\PDO\ComponentWriterPDO;
+use ComAI\ArduComponents\WorkingCheck\Infrastructure\Repository\GuzzleSesameCheckReaderRepository;
 use Psr\Container\ContainerInterface;
 use Slim\Factory\AppFactory;
 
@@ -50,6 +51,11 @@ return [
             $container->get('ComponentWriterDatabase'),
             $container->get(AmbientFactory::class),
             $dateFormat
+        );
+    },
+    GuzzleSesameCheckReaderRepository::class => function (ContainerInterface $container) {
+        return new GuzzleSesameCheckReaderRepository(
+            $container->get('config')['sesameUrl']
         );
     }
 ];

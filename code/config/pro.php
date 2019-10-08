@@ -28,5 +28,6 @@ return [
         'useCases'      => __DIR__ . '/di.use_cases.php',
         'controllers'   => __DIR__ . '/di.controllers.php'
     ],
-    'dateFormat' => 'Y-m-d H:i:s'
+    'dateFormat'    => 'Y-m-d H:i:s',
+    'sesameUrl'     => 'https://panel.sesametime.com'
 ];

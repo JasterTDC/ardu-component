@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ComAI\ArduComponents\Sesame\Infrastructure\Controller;
+namespace ComAI\ArduComponents\WorkingCheck\Infrastructure\Controller;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;

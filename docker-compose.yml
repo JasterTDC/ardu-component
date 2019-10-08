@@ -19,3 +19,4 @@ services :
     volumes :
       - ./code:/srv/www
       - ./logs:/LOGS
+      - ./html:/var/static/html
