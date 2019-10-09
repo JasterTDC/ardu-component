@@ -2,6 +2,7 @@
 
 use ComAI\ArduComponents\Ambient\Application\UseCase\RegisterAmbientUseCase;
 use ComAI\ArduComponents\Ambient\Infrastructure\Controller\RegisterAmbientController;
+use ComAI\ArduComponents\Main\Infrastructure\Controller\MainController;
 use ComAI\ArduComponents\WorkingCheck\Application\UseCase\SesamePanelUseCase;
 use ComAI\ArduComponents\WorkingCheck\Infrastructure\Controller\SesameImproveController;
 use Psr\Container\ContainerInterface;
@@ -21,5 +22,8 @@ return [
         return new SesameImproveController(
             $container->get(SesamePanelUseCase::class)
         );
+    },
+    MainController::class => function (ContainerInterface $container) {
+        return new MainController();
     }
 ];

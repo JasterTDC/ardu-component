@@ -60,6 +60,13 @@ final class SesameHtmlParser
             );
         }
 
+        if (empty($button->item(0))) {
+            throw new CheckButtonEmptyException(
+                'There is not any item at first position',
+                1
+            );
+        }
+
         return (string) $button->item(0)->nodeValue;
     }
 
@@ -75,6 +82,13 @@ final class SesameHtmlParser
             throw new WorkedTimeEmptyException(
                 'We could not find worked time',
                 0
+            );
+        }
+
+        if (empty($workedTime->item(0))) {
+            throw new WorkedTimeEmptyException(
+                'There is not any item at first position',
+                1
             );
         }
 

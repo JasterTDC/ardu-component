@@ -1,6 +1,7 @@
 <?php
 
 use ComAI\ArduComponents\Ambient\Infrastructure\Controller\RegisterAmbientController;
+use ComAI\ArduComponents\Main\Infrastructure\Controller\MainController;
 use ComAI\ArduComponents\WorkingCheck\Infrastructure\Controller\SesameController;
 use ComAI\ArduComponents\WorkingCheck\Infrastructure\Controller\SesameImproveController;
 use Slim\Factory\AppFactory;
@@ -22,4 +23,10 @@ $application->group('/sesame', function(RouteCollectorProxy $routeCollector) {
     $routeCollector
         ->get('/check-improve', SesameImproveController::class)
         ->setName('check-sesame');
+});
+
+$application->group('/', function(RouteCollectorProxy $routeCollector) {
+    $routeCollector
+        ->get('', MainController::class)
+        ->setName('main');
 });
